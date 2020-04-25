@@ -14,6 +14,6 @@ jobs:
       - name: Get the sources
         uses: actions/checkout@v1
       - name: Restore the deps
-        uses: npm ci
+        run: npm ci
       - name: Build
-        uses: npm run all
+        run: npm run all
