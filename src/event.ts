@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 
 export const getCreatedTag = (): string | null => {
-  if (github.context.eventName != 'create') {
+  if (github.context.eventName !== 'create') {
     core.info(`The event name was ${github.context.eventName}.`)
 
     return null
