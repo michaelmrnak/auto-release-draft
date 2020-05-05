@@ -10,7 +10,7 @@ export async function run(): Promise<void> {
     const tag = event.getCreatedTag()
     let releaseUrl = ''
 
-    if (tag && version.isSemver(tag)) {
+    if (tag && version.isSemVer(tag)) {
       const changelog = await git.getChangesIntroducedByTag(tag)
 
       releaseUrl = await github.createReleaseDraft(tag, token, changelog)
