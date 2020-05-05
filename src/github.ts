@@ -3,14 +3,14 @@ import * as github from '@actions/github'
 import * as version from './version'
 import * as markdown from './markdown'
 
-export const createReleaseDraft = async (
+export async function createReleaseDraft(
   versionTag: string,
   repoToken: string,
   changeLog: string
-): Promise<string> => {
-  const oktokit = new github.GitHub(repoToken)
+): Promise<string> {
+  const octokit = new github.GitHub(repoToken)
 
-  const response = await oktokit.repos.createRelease({
+  const response = await octokit.repos.createRelease({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     tag_name: versionTag, // eslint-disable-line @typescript-eslint/camelcase
@@ -21,7 +21,7 @@ export const createReleaseDraft = async (
   })
 
   if (response.status !== 201) {
-    throw new Error(`Failed to create the release ${response.status}`)
+    throw new Error(`Failed to create the release: ${response.status}`)
   }
 
   core.info(`Created release draft ${response.data.name}`)
